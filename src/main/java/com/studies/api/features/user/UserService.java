@@ -36,6 +36,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
     public Page<GetAllUsersNoSensitiveInfoDto> listActiveUsers(Pageable pageable){
         var page = userRepository.findAllByActiveTrue(pageable).map(GetAllUsersNoSensitiveInfoDto::new);
         return page;

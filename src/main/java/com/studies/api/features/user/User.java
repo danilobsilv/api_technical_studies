@@ -73,11 +73,11 @@ public class User implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return "";
+        return this.userPasswordHash;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.userName;
     }
 }

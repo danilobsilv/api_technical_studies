@@ -10,8 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -27,6 +30,12 @@ public class UserController {
         var uri = uriComponentsBuilder.path("/category/{category_id}").buildAndExpand(adminUser.getUserId()).toUri();
 
         return ResponseEntity.created(uri).body(new UserResponseType(adminUser));
+    }
+
+    @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<User>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/")

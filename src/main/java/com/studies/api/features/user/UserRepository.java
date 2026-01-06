@@ -14,8 +14,9 @@ public interface UserRepository extends JpaRepository<User, String> {
     boolean existsByUserEmail(String email);
 
     @Query("""
-            select m.isActive from User m
-            order by m.userName asc
+            SELECT m FROM User m
+            WHERE m.isActive = true
+            ORDER BY m.userName ASC
             """)
     Page<User> findAllByActiveTrue(Pageable pageable);
 }

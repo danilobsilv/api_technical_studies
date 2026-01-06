@@ -28,7 +28,7 @@ services:
       db-mysql:
         condition: service_healthy
     ports:
-      - "${APP_PORT}:8080"
+      - "8082:8082"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/${MYSQL_DB}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}

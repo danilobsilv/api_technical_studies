@@ -19,7 +19,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<DataTokenJwtType> doLogin(@RequestBody @Valid AuthDataDto dto){
         return authService.doLogin(dto);
     }
