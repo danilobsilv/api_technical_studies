@@ -2,8 +2,6 @@ package com.studies.api.infra.errorHandler;
 
 public enum ErrorTypes {
     RESOURCE_NOT_FOUND,
-    INVALID_TRANSACTION,
-    INVALID_POSITION,
     VALIDATION_ERROR,
     RESOURCE_CONFLICT,
     INTERNAL_SERVER_ERROR,

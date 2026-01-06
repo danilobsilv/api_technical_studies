@@ -6,6 +6,7 @@ import com.studies.api.infra.errorHandler.invalidAuthentication.InvalidAuthentic
 import com.studies.api.infra.security.DataTokenJwtType;
 import com.studies.api.infra.security.TokenService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
