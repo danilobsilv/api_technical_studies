@@ -1,0 +1,46 @@
+services:
+  db-mysql-dev:
+    image: mysql:8.0
+    container_name: techstudies-mysql-dev
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+    ports:
+      - "${HOST_DB_PORT}:3306"
+    volumes:
+      - db_data_dev:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - dev-network
+
+  techstudies-api-dev:
+    build: .
+    container_name: techstudies-api-dev
+    restart: on-failure
+    depends_on:
+      db-mysql-dev:
+        condition: service_healthy
+    ports:
+      - "${HOST_APP_PORT}:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE}
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql-dev:3306/${MYSQL_DB}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASS}
+      - API_SECURITY_TOKEN=${API_SECURITY_TOKEN}
+      - APP_PORT=8080
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    driver: bridge
+
+volumes:
+  db_data_dev:

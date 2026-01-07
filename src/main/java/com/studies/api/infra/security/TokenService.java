@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class TokenService {
@@ -48,6 +49,6 @@ public class TokenService {
     }
 
     private Instant tokenExpirationDate(){
-        return LocalDateTime.now().plusMonths(1).toInstant(ZoneOffset.of("-04:00"));
+        return Instant.now().plus(30, ChronoUnit.DAYS);
     }
 }
