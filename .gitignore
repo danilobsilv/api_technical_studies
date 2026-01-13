@@ -59,6 +59,8 @@ replay_pid*
 
 notes.txt
 
+src/main/resources/db/migration
+
 .env
 .env.dev
 .env.test
